@@ -4,14 +4,15 @@ export interface PixelsCanvasParameters {
   width: number;
   height: number;
   pixelSize?: number;
+  canvas?: HTMLCanvasElement
 }
 
 export class PixelsCanvas {
   imageData: ImageData;
   private readonly canvasContext: CanvasRenderingContext2D;
   constructor(options: PixelsCanvasParameters) {
-    const { width, height, pixelSize } = { pixelSize: 1, ...options };
-    this.canvasContext = document.createElement("canvas").getContext("2d")!;
+    const { width, height, pixelSize, canvas } = { pixelSize: 1, ...options };
+    this.canvasContext = (canvas || document.createElement("canvas")).getContext("2d")!;
     this.canvas.width = width;
     this.canvas.height = height;
     setStyles(this.canvas, {
