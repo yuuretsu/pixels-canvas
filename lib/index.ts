@@ -12,14 +12,19 @@ export class PixelsCanvas {
   private readonly canvasContext: CanvasRenderingContext2D;
   constructor(options: PixelsCanvasParameters) {
     const { width, height, pixelSize, canvas } = { pixelSize: 1, ...options };
-    this.canvasContext = (canvas || document.createElement("canvas")).getContext("2d")!;
+
+    this.canvasContext = (canvas || document.createElement("canvas"))
+      .getContext("2d", { willReadFrequently: true })!;
+
     this.canvas.width = width;
     this.canvas.height = height;
+
     setStyles(this.canvas, {
       width: `${width * pixelSize}px`,
       height: `${height * pixelSize}px`,
       imageRendering: "pixelated",
     });
+
     this.imageData = new ImageData(width, height);
   }
 

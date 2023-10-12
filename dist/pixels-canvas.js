@@ -1,9 +1,9 @@
 class r {
   constructor(a) {
-    const { width: t, height: e, pixelSize: s, canvas: n } = { pixelSize: 1, ...a };
-    this.canvasContext = (n || document.createElement("canvas")).getContext("2d"), this.canvas.width = t, this.canvas.height = e, g(this.canvas, {
-      width: `${t * s}px`,
-      height: `${e * s}px`,
+    const { width: t, height: e, pixelSize: n, canvas: s } = { pixelSize: 1, ...a };
+    this.canvasContext = (s || document.createElement("canvas")).getContext("2d", { willReadFrequently: !0 }), this.canvas.width = t, this.canvas.height = e, g(this.canvas, {
+      width: `${t * n}px`,
+      height: `${e * n}px`,
       imageRendering: "pixelated"
     }), this.imageData = new ImageData(t, e);
   }
@@ -23,8 +23,8 @@ class r {
     this.canvasContext.putImageData(e, a, t), this.refreshImageData();
   }
   setPixels(a, t, e) {
-    const s = a[0].length, n = new ImageData(new Uint8ClampedArray(a.flatMap((c) => c.flat())), s);
-    this.putImageData(t, e, n);
+    const n = a[0].length, s = new ImageData(new Uint8ClampedArray(a.flatMap((c) => c.flat())), n);
+    this.putImageData(t, e, s);
   }
   getPixels() {
     return h(h([...this.imageData.data], 4), this.width);
