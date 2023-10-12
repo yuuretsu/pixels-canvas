@@ -57,9 +57,24 @@ export class PixelsCanvas {
     this.canvasContext.putImageData(newImageData, x, y);
   }
 
+  private chunkChannels(array: number[]) {
+    return chunk(chunk(array, 4) as RGBA[], this.width);
+  }
+
+  createPixels(): RGBA[][] {
+    return this.chunkChannels(Array.from({ length: this.width * this.height * 4 }));
+  }
+
   getPixels(): RGBA[][] {
     const imageData = this.canvasContext.getImageData(0, 0, this.width, this.height);
-    return chunk(chunk([...imageData.data], 4) as RGBA[], this.width)
+    return this.chunkChannels([...imageData.data]);
+  }
+
+  clear() {
+    this.canvasContext.save();
+    this.canvasContext.resetTransform();
+    this.canvasContext.clearRect(0, 0, this.width, this.height);
+    this.canvasContext.restore();
   }
 }
 

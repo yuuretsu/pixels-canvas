@@ -14,7 +14,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "publish": "npm publish --access public"
+    "publish": "npm publish --access public",
+    "build-and-publish": "npm run build && npm run publish"
   },
   "devDependencies": {
     "typescript": "^5.2.2",
