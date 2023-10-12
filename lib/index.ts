@@ -51,8 +51,22 @@ export class PixelsCanvas {
 
   setPixels(pixels: RGBA[][], x: number, y: number) {
     const width = pixels[0]!.length;
-    const imageData = new ImageData(new Uint8ClampedArray(pixels.flatMap(row => row.flat())), width);
-    this.putImageData(x, y, imageData);
+    const height = pixels.length;
+
+    const newImageData = new ImageData(width, height);
+
+    for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+        const [r, g, b, a] = pixels[i]![j]!;
+        const baseIndex = (i * width + j) * 4;
+        newImageData.data[baseIndex] = r;
+        newImageData.data[baseIndex + 1] = g;
+        newImageData.data[baseIndex + 2] = b;
+        newImageData.data[baseIndex + 3] = a;
+      }
+    }
+
+    this.putImageData(x, y, newImageData);
   }
 
   getPixels(): RGBA[][] {
