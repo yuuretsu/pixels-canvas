@@ -1,3 +1,5 @@
+import { chunk, setStyles } from "./utils";
+
 export type RGBA = [r: number, g: number, b: number, a: number];
 
 export interface PixelsCanvasParameters {
@@ -75,22 +77,5 @@ export class PixelsCanvas {
     this.canvasContext.resetTransform();
     this.canvasContext.clearRect(0, 0, this.width, this.height);
     this.canvasContext.restore();
-  }
-}
-
-function chunk<T>(arr: T[], size: number): T[][] {
-  const chunks: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    chunks.push(arr.slice(i, i + size));
-  }
-  return chunks;
-}
-
-function setStyles(
-  element: ElementCSSInlineStyle,
-  style: Partial<CSSStyleDeclaration>
-) {
-  for (const key in style) {
-    element.style[key] = style[key]!;
   }
 }

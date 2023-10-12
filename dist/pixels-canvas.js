@@ -1,3 +1,13 @@
+function g(s, t) {
+  const e = [];
+  for (let a = 0; a < s.length; a += t)
+    e.push(s.slice(a, a + t));
+  return e;
+}
+function x(s, t) {
+  for (const e in t)
+    s.style[e] = t[e];
+}
 class w {
   constructor(t) {
     const { width: e, height: a, pixelSize: n, canvas: i } = { pixelSize: 1, ...t };
@@ -38,16 +48,6 @@ class w {
   clear() {
     this.canvasContext.save(), this.canvasContext.resetTransform(), this.canvasContext.clearRect(0, 0, this.width, this.height), this.canvasContext.restore();
   }
-}
-function g(s, t) {
-  const e = [];
-  for (let a = 0; a < s.length; a += t)
-    e.push(s.slice(a, a + t));
-  return e;
-}
-function x(s, t) {
-  for (const e in t)
-    s.style[e] = t[e];
 }
 export {
   w as PixelsCanvas
