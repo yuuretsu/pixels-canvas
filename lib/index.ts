@@ -8,7 +8,6 @@ export interface PixelsCanvasParameters {
 }
 
 export class PixelsCanvas {
-  imageData: ImageData;
   private readonly canvasContext: CanvasRenderingContext2D;
   constructor(options: PixelsCanvasParameters) {
     const { width, height, pixelSize, canvas } = { pixelSize: 1, ...options };
@@ -24,8 +23,6 @@ export class PixelsCanvas {
       height: `${height * pixelSize}px`,
       imageRendering: "pixelated",
     });
-
-    this.imageData = new ImageData(width, height);
   }
 
   get canvas() {
@@ -38,15 +35,6 @@ export class PixelsCanvas {
 
   get height() {
     return this.canvas.height;
-  }
-
-  private refreshImageData() {
-    this.imageData = this.canvasContext.getImageData(0, 0, this.width, this.height);
-  }
-
-  private putImageData(x: number, y: number, imageData: ImageData) {
-    this.canvasContext.putImageData(imageData, x, y);
-    this.refreshImageData();
   }
 
   setPixels(pixels: RGBA[][], x: number, y: number) {
@@ -66,11 +54,12 @@ export class PixelsCanvas {
       }
     }
 
-    this.putImageData(x, y, newImageData);
+    this.canvasContext.putImageData(newImageData, x, y);
   }
 
   getPixels(): RGBA[][] {
-    return chunk(chunk([...this.imageData.data], 4) as RGBA[], this.width)
+    const imageData = this.canvasContext.getImageData(0, 0, this.width, this.height);
+    return chunk(chunk([...imageData.data], 4) as RGBA[], this.width)
   }
 }
 

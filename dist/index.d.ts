@@ -1,12 +1,9 @@
 export declare class PixelsCanvas {
-    imageData: ImageData;
     private readonly canvasContext;
     constructor(options: PixelsCanvasParameters);
     get canvas(): HTMLCanvasElement;
     get width(): number;
     get height(): number;
-    private refreshImageData;
-    private putImageData;
     setPixels(pixels: RGBA[][], x: number, y: number): void;
     getPixels(): RGBA[][];
 }
