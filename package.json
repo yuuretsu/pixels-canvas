@@ -1,6 +1,6 @@
 {
   "name": "@yuuretsu/pixels-canvas",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Yurii Morozov",
   "main": "./dist/pixels-canvas.umd.cjs",
   "module": "./dist/pixels-canvas.js",
